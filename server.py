@@ -50,13 +50,13 @@ if on_win :
     current_folder = os.path.dirname(os.path.abspath(__file__))
     model_folder_path = os.path.join(current_folder, "_insightface_root")
 
-# 初始化人脸识别器
-faceAnalysis = FaceAnalysis(providers=['CUDAExecutionProvider', 'CPUExecutionProvider'],root=model_folder_path, allowed_modules=['detection', 'recognition'], name=recognition_model)
+# 初始化人脸识别器 'DmlExecutionProvider',
+faceAnalysis = FaceAnalysis(providers=['CUDAExecutionProvider', 'DmlExecutionProvider','CPUExecutionProvider'],root=model_folder_path, allowed_modules=['detection', 'recognition'], name=recognition_model)
 faceAnalysis.prepare(ctx_id=0, det_thresh=detection_thresh, det_size=(640, 640))
 
 
 async def check_inactive():
-    await asyncio.sleep(3600)
+    await asyncio.sleep(300) #5 min
     restart_program()
 
 
@@ -124,19 +124,9 @@ async def process_image(file: UploadFile = File(...), api_key: str = Depends(ver
             return {'result': [], 'msg': 'height or width out of range'}
 
         data = {"detector_backend": detector_backend, "recognition_model": recognition_model}
-        embedding_objs = await predict(_represent, img)
-        # embedding_objs = DeepFace.represent(
-        #     img_path=img,
-        #     detector_backend=detector_backend,
-        #     model_name=recognition_model,
-        #     enforce_detection=True,  # 强制检测，如果为true会报错, 设置为False时可以针对整张照片进行特征识别
-        #     align=True,
-        # )
-        #enforce_detection=True 时，未识别到人脸的错误信息
-        #1
-        # Face could not be detected in numpy array.Please confirm that the picture is a face photo or consider to set enforce_detection param to False.
-        #2
-        # Exception while extracting faces from numpy array.Consider to set enforce_detection arg to False.
+
+        # embedding_objs = await predict(_represent, img)
+        embedding_objs = _represent(img)  # DmlExecutionProvider使用异步并发时会导致程序退出
         del img
         data["result"] = embedding_objs
         # logging.info("detector_backend: %s", detector_backend)
@@ -164,7 +154,7 @@ def _represent(img):
     # print(len(resp_obj["embedding"]))
     box = face.bbox
     resp_obj["facial_area"] = {"x" : int(box[0]), "y" : int(box[1]), "w" : int(box[2] - box[0]), "h" : int(box[3] - box[1])}
-    resp_obj["face_confidence"] = face.det_score.astype(float) 
+    resp_obj["face_confidence"] = face.det_score.astype(float)
     results.append(resp_obj)
   return results
 
