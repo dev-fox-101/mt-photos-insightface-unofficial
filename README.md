@@ -49,9 +49,15 @@ docker build  . -t mt-photos-insightface-unofficial:latest
 ### 下载源码本地运行
 
 - 安装python **3.8版本**
-- 在文件夹下执行`pip install -r requirements.txt`
+- 在文件夹下执行`pip install -r requirements.txt` 并卸载onnxruntime、安装onnxruntime-directml
+```bash
+pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple/
+pip uninstall onnxruntime
+pip install onnxruntime-directml==1.17.3 -i https://pypi.tuna.tsinghua.edu.cn/simple/
+```
 - 复制`.env.example`生成`.env`文件，然后修改`.env`文件内的API_AUTH_KEY
 - 执行 `python server.py` ，启动服务
+  
 
 看到以下日志，则说明服务已经启动成功
 ```bash
