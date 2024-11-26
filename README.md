@@ -49,7 +49,11 @@ docker build  . -t mt-photos-insightface-unofficial:latest
 ### 下载源码本地运行
 
 - 安装python **3.8版本**
-- 在文件夹下执行`pip install -r requirements.txt`
+- 在文件夹下执行`pip install -r requirements.txt
+```bash
+pip uninstall onnxruntime
+pip install onnxruntime-gpu -i https://pypi.tuna.tsinghua.edu.cn/simple/
+```  
 - 复制`.env.example`生成`.env`文件，然后修改`.env`文件内的API_AUTH_KEY
 - 执行 `python server.py` ，启动服务
 
