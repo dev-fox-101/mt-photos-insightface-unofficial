@@ -49,8 +49,9 @@ docker build  . -t mt-photos-insightface-unofficial:latest
 ### 下载源码本地运行
 
 - 安装python **3.8版本**
-- 在文件夹下执行`pip install -r requirements.txt
+- 在文件夹下安装依赖包，然后安装gpu版本onnxruntime
 ```bash
+pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple/
 pip uninstall onnxruntime
 pip install onnxruntime-gpu -i https://pypi.tuna.tsinghua.edu.cn/simple/
 ```  
