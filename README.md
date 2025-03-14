@@ -3,6 +3,14 @@
 - 仅供非商业测试
 - fork自[MT-Photos/mt-photos-deepface](https://github.com/MT-Photos/mt-photos-deepface), 删除了deepface相关，添加基于[deepinsight/insightface](https://github.com/deepinsight/insightface)实现的人脸识别API
 
+
+> **更新记录：** 
+> 
+> V1.1.0  -  2025-03-14
+> 
+> 1、增加容器启动后延迟加载模型，以及2分钟内没有识别任务自动释放模型内存
+
+
 ## 模型选择
 
 insightface提供了3种模型可供选择，从上到下精度逐渐下降，可获得更快的识别速度，默认使用buffalo_l模型
@@ -23,11 +31,6 @@ recognition_model = os.getenv("RECOGNITION_MODEL", "buffalo_l")
 所有模型向量长度均为默认512即可
 
 
-> **更新记录：** 
-> 
-> V1.1.0  -  2025-03-14
-> 
-> 1、增加容器启动后延迟加载模型，以及2分钟内没有识别任务自动释放模型内存
 
 
 
