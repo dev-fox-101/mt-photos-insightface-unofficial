@@ -55,7 +55,7 @@ face_model = None
 
 
 async def check_inactive():
-    await asyncio.sleep(120) #2 min
+    await asyncio.sleep(300) #延迟5分钟重启 ，2分钟自动释放太快了，有些机器2分钟还没识别完成一张图片
     restart_program()
 
 
