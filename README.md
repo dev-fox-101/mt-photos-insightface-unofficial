@@ -52,9 +52,29 @@ docker run -i -p 8066:8066 -e API_AUTH_KEY=mt_photos_ai_extra --name mt-photos-i
 
 ## 打包docker镜像
 
-可以自行编译打包镜像
+### 下载模型文件
+
+从下面的地址下载模型，然后放到 ./models 文件夹里
+
+ - 模型文件下载地址：https://github.com/kqstone/mt-photos-insightface-unofficial/releases/tag/models
+ - 或者百度网盘：https://pan.baidu.com/s/1SsY7_2t7aORh2jCvGWtD1A?pwd=1234
+
+比如下载buffalo_l.zip ，然后把文件解压到 ./models/buffalo_l 这个目录
+
+解压完成后，在 ./models/buffalo_l目录下，可以看到 1k3d68.onnx、2d106det.onnx、det_10g.onnx、genderage.onnx、w600k_r50.onnx 5个文件
+
+如果放在的目录错误，在打包镜像时，会提示 `COPY ./models /root/.insightface/models` 这一行错误
+
+### 打包镜像
+
+cpu识别镜像打包
 ```bash
 docker build  . -t mt-photos-insightface-unofficial:latest
+```
+
+cuda镜像打包
+```bash
+docker build -f cuda.Dockerfile . -t mt-photos-insightface-unofficial:cuda-latest
 ```
 
 ### 下载源码本地运行

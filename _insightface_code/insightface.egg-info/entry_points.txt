@@ -1,0 +1,3 @@
+[console_scripts]
+insightface-cli = insightface.commands.insightface_cli:main
+

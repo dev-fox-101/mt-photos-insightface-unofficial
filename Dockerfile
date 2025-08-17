@@ -15,6 +15,6 @@ ENV DETECTION_THRESH=0.65
 EXPOSE 8066
 
 # VOLUME ["/root/.insightface/models"]
-COPY ./models /root/.insightface/models # 将模型文件复制到镜像内
+COPY ./models /root/.insightface/models
 
 CMD [ "python3", "server.py" ]

@@ -1,0 +1,13 @@
+Pillow
+albumentations
+cython
+easydict
+matplotlib
+numpy
+onnx
+prettytable
+requests
+scikit-image
+scikit-learn
+scipy
+tqdm
