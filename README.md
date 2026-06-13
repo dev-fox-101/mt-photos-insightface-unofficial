@@ -1,8 +1,6 @@
-# MT Photos非官方人脸识别API
+# MT Photos 人脸识别API
 
-- 仅供非商业测试
-- fork自[MT-Photos/mt-photos-deepface](https://github.com/MT-Photos/mt-photos-deepface), 删除了deepface相关，添加基于[deepinsight/insightface](https://github.com/deepinsight/insightface)实现的人脸识别API
-
+镜像仓库地址：https://hub.docker.com/r/devfox101/mt-photos-insightface-unofficial
 
 > **更新记录：** 
 > 
@@ -13,7 +11,7 @@
 
 ## 模型选择
 
-insightface提供了3种模型可供选择，从上到下精度逐渐下降，可获得更快的识别速度，默认使用buffalo_l模型
+insightface提供了3种模型可供选择，从上到下精度逐渐下降，可获得更快的识别速度，默认使用buffalo_l模型(镜像在打包时，已内置这个模型)
 
 可通过环境变量 `RECOGNITION_MODEL`来自定义特征提取模型；
 
